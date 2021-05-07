@@ -8,6 +8,7 @@ const categories = require('./categories/Category');
 const articles = require('./articles/Article');
 
 app.set('view engine', 'ejs');
+app.use(express.static('public'))
 
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
