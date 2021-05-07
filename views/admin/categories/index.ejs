@@ -1,0 +1,48 @@
+<%- include('../../partials/header') %>
+<body>
+  <%- include('../../partials/navbar') %>
+  <div class="container">
+    <hr>
+    <h2>Categorias</h2>
+    <hr>
+    <a href="/admin/categories/new" class="btn btn-success btn-sm">Criar nova categoria</a>
+    <hr>
+    <table class="table table-sm table-bordered table-striped">
+        <thead>
+            <tr class="text-center">
+            <th>ID</th>
+            <th>Titulo</th>
+            <th>Slug</th>
+            <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% category.forEach(categories => { %>
+                <tr class="text-center">
+                    <th><%= categories.id %> </th>
+                    <th><%= categories.title %> </th>
+                    <th><%= categories.slug %> </th>
+                    <th>
+                        <button class="btn btn-warning btn-sm">Editar</button>
+
+                        <form action="/categories/delete" method="post" style="display: inline;" onsubmit="confirmDelete(event, this)">
+                            <input type="hidden" name="id" value="<%= categories.id %> ">
+                            <button class="btn btn-danger btn-sm">Deletar</button>
+                        </form>
+                    </th>
+                </tr>
+            <% }) %> 
+        </tbody>
+    </table>
+  </div>
+</body>
+<%- include('../../partials/footer') %>
+<script>
+    function confirmDelete(event, form){
+        event.preventDefault();
+        var decision = confirm('Deseja deletar ?');
+        if(decision){
+            form.submit();
+        }
+    }
+</script>
